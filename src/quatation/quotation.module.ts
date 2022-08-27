@@ -7,12 +7,7 @@ import { QuotationService } from './service/quotation.service';
 import { QuotationRepository } from './repository/quatation.repository';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([
-    Quotation,
-    QuotationRepository,
-    ]),
-],
+  imports: [TypeOrmModule.forFeature([Quotation, QuotationRepository])],
   providers: [QuotationService, QuatationResolver],
 })
 export class QuotationModule {}
