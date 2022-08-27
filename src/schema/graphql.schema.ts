@@ -17,6 +17,12 @@ export enum HotelStar {
     NoPreference = "NoPreference"
 }
 
+export enum QuotationStatus {
+    ACCEPTED = "ACCEPTED",
+    REJECTED = "REJECTED",
+    PENDING = "PENDING"
+}
+
 export interface CreateAgentInput {
     name: string;
     address: string;
@@ -46,6 +52,20 @@ export interface CreateEnquiryInput {
     children?: Nullable<number>;
     hotelStar?: Nullable<HotelStar>;
     notes?: Nullable<string>;
+}
+
+export interface CreateQuotationInput {
+    userId?: Nullable<string>;
+    enquiryId?: Nullable<string>;
+    agentId?: Nullable<string>;
+    fileLink?: Nullable<string>;
+    notes?: Nullable<string>;
+}
+
+export interface QuotationQueryOption {
+    userId?: Nullable<string>;
+    agentId?: Nullable<string>;
+    status?: Nullable<QuotationStatus>;
 }
 
 export interface CreateUserInput {
@@ -78,7 +98,8 @@ export interface IQuery {
     getEnquiry(id: string): Nullable<Enquiry> | Promise<Nullable<Enquiry>>;
     getCustomerEnquiries(userId: string): Nullable<Nullable<Enquiry>[]> | Promise<Nullable<Nullable<Enquiry>[]>>;
     getDestinationEnquiries(destinationId: string): Nullable<Nullable<Enquiry>[]> | Promise<Nullable<Nullable<Enquiry>[]>>;
-    getPresignedUrl(): Nullable<string> | Promise<Nullable<string>>;
+    getPresignedUrl(): Nullable<GetPreSignedUrlOutput> | Promise<Nullable<GetPreSignedUrlOutput>>;
+    getQuotations(quotationQueryOption?: Nullable<QuotationQueryOption>): Nullable<Nullable<Quotation>[]> | Promise<Nullable<Nullable<Quotation>[]>>;
     getUsers(): Nullable<Nullable<User>[]> | Promise<Nullable<Nullable<User>[]>>;
     getUser(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
@@ -90,6 +111,7 @@ export interface IMutation {
     createDestination(input: CreateDestinationInput): Nullable<Destination> | Promise<Nullable<Destination>>;
     createEnquiry(input?: Nullable<CreateEnquiryInput>): Nullable<Enquiry> | Promise<Nullable<Enquiry>>;
     deleteEnquiry(id: string): Nullable<boolean> | Promise<Nullable<boolean>>;
+    createQuotation(input: CreateQuotationInput): Nullable<Quotation> | Promise<Nullable<Quotation>>;
     createUser(input: CreateUserInput): Nullable<User> | Promise<Nullable<User>>;
     updateUser(id: string, input: UpdateUserInput): Nullable<User> | Promise<Nullable<User>>;
     deleteUser(id: string): Nullable<User> | Promise<Nullable<User>>;
@@ -113,6 +135,21 @@ export interface Enquiry {
     hotelStar?: Nullable<HotelStar>;
     notes?: Nullable<string>;
     createdAt?: Nullable<Date>;
+}
+
+export interface GetPreSignedUrlOutput {
+    key?: Nullable<string>;
+    url?: Nullable<string>;
+}
+
+export interface Quotation {
+    id?: Nullable<string>;
+    userId?: Nullable<string>;
+    enquiryId?: Nullable<string>;
+    agentId?: Nullable<string>;
+    fileLink?: Nullable<string>;
+    notes?: Nullable<string>;
+    status?: Nullable<string>;
 }
 
 export interface User {

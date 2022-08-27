@@ -1,0 +1,37 @@
+type Quotation {
+  id: String
+  userId: String
+  enquiryId: String
+  agentId: String
+  fileLink: String
+  notes: String
+  status: String
+}
+
+input CreateQuotationInput {
+  userId: String
+  enquiryId: String
+  agentId: String
+  fileLink: String
+  notes: String
+}
+
+enum QuotationStatus {
+  ACCEPTED
+  REJECTED
+  PENDING
+}
+
+input QuotationQueryOption {
+  userId: String
+  agentId: String
+  status: QuotationStatus
+}
+
+type Query {
+  getQuotations(quotationQueryOption: QuotationQueryOption): [Quotation]
+}
+
+type Mutation {
+  createQuotation(input: CreateQuotationInput!): Quotation
+}
