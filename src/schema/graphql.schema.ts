@@ -78,6 +78,7 @@ export interface IQuery {
     getDestination(id: string): Nullable<Destination> | Promise<Nullable<Destination>>;
     getEnquiry(id: string): Nullable<Enquiry> | Promise<Nullable<Enquiry>>;
     getEnquiries(): Nullable<Nullable<Enquiry>[]> | Promise<Nullable<Nullable<Enquiry>[]>>;
+    getPresignedUrl(): Nullable<string> | Promise<Nullable<string>>;
     getUsers(): Nullable<Nullable<User>[]> | Promise<Nullable<Nullable<User>[]>>;
     getUser(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
