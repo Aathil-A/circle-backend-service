@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Enquiry } from '../../enquiry/entity/enquiry.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -14,13 +15,15 @@ export class User {
   @Column()
   name: string;
 
-  @Column({nullable:true})
-  address: string;
+  @Column({ nullable: true })
+  address?: string;
 
-  @Column({nullable:true})
-  phone: string;
+  @Column({ nullable: true })
+  phone?: string;
 
-  @Column({nullable:true})
-  firebaseId: string;
+  @Column({ nullable: true })
+  firebaseId?: string;
 
+  @OneToMany(() => Enquiry, (enquiry) => enquiry.user)
+  enquiry!: Enquiry[];
 }

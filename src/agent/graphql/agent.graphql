@@ -1,0 +1,33 @@
+type Agent{
+    id: String
+    name: String
+    address: String
+    phone: String
+    firebaseId: String
+    isVerified: Boolean
+}
+
+
+input CreateAgentInput{
+    name: String!
+    address: String!
+    phone: String!
+    firebaseId:String
+}
+
+input UpdateAgentInput{
+    name: String!
+    address: String!
+    phone: String!
+    firebaseId:String
+}
+type Query{
+    getAgents:[Agent]
+    getAgent(id:ID!): Agent
+}
+
+type Mutation{
+    createAgent(input:CreateAgentInput): Agent
+    updateAgent(input:UpdateAgentInput): Agent
+    deleteAgent(id:ID!):Agent
+}
