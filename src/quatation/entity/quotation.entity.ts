@@ -15,6 +15,9 @@ export class Quotation extends BaseEntity {
   @Column('uuid')
   agentId!: string;
 
+  @Column()
+  price!: number;
+
   @Column({ nullable: true })
   fileLink?: string;
 
