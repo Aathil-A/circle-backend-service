@@ -8,6 +8,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export enum HotelStar {
+    One = "One",
+    Two = "Two",
+    Three = "Three",
+    Four = "Four",
+    Five = "Five",
+    No = "No",
+    Preference = "Preference"
+}
+
 export interface CreateAgentInput {
     name: string;
     address: string;
@@ -24,6 +34,19 @@ export interface UpdateAgentInput {
 
 export interface CreateDestinationInput {
     name: string;
+}
+
+export interface CreateEnquiryInput {
+    userId: string;
+    pickUpPoint: string;
+    destinationId: string;
+    startDate: Date;
+    returnDate: Date;
+    budget: number;
+    adults: number;
+    children?: Nullable<number>;
+    hotelStar?: Nullable<HotelStar>;
+    notes?: Nullable<string>;
 }
 
 export interface CreateUserInput {
@@ -53,6 +76,8 @@ export interface IQuery {
     health(): Nullable<string> | Promise<Nullable<string>>;
     getDestinations(): Nullable<Nullable<Destination>[]> | Promise<Nullable<Nullable<Destination>[]>>;
     getDestination(id: string): Nullable<Destination> | Promise<Nullable<Destination>>;
+    getEnquiry(id: string): Nullable<Enquiry> | Promise<Nullable<Enquiry>>;
+    getEnquiries(): Nullable<Nullable<Enquiry>[]> | Promise<Nullable<Nullable<Enquiry>[]>>;
     getUsers(): Nullable<Nullable<User>[]> | Promise<Nullable<Nullable<User>[]>>;
     getUser(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
@@ -62,6 +87,8 @@ export interface IMutation {
     updateAgent(input?: Nullable<UpdateAgentInput>): Nullable<Agent> | Promise<Nullable<Agent>>;
     deleteAgent(id: string): Nullable<Agent> | Promise<Nullable<Agent>>;
     createDestination(input: CreateDestinationInput): Nullable<Destination> | Promise<Nullable<Destination>>;
+    createEnquiry(input?: Nullable<CreateEnquiryInput>): Nullable<Enquiry> | Promise<Nullable<Enquiry>>;
+    deleteEnquiry(id: string): Nullable<boolean> | Promise<Nullable<boolean>>;
     createUser(input: CreateUserInput): Nullable<User> | Promise<Nullable<User>>;
     updateUser(id: string, input: UpdateUserInput): Nullable<User> | Promise<Nullable<User>>;
     deleteUser(id: string): Nullable<User> | Promise<Nullable<User>>;
@@ -70,6 +97,21 @@ export interface IMutation {
 export interface Destination {
     id?: Nullable<string>;
     name?: Nullable<string>;
+}
+
+export interface Enquiry {
+    id?: Nullable<string>;
+    user?: Nullable<User>;
+    pickUpPoint?: Nullable<string>;
+    destination?: Nullable<Destination>;
+    startDate?: Nullable<Date>;
+    returnDate?: Nullable<Date>;
+    budget?: Nullable<number>;
+    adults?: Nullable<number>;
+    children?: Nullable<number>;
+    hotelStar?: Nullable<HotelStar>;
+    notes?: Nullable<string>;
+    createdAt?: Nullable<Date>;
 }
 
 export interface User {
