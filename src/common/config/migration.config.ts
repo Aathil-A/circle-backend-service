@@ -16,6 +16,5 @@ const datasource = new DataSource({
   migrationsTableName: 'migrations',
   namingStrategy: new SnakeNamingStrategy(),
   migrations: [`${__dirname}/../migrations/*{.ts,.js}`],
-   
 });
 export default datasource;

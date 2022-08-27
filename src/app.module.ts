@@ -31,10 +31,7 @@ import { DatabaseModule } from './common/database/database.module';
       path: '/graphql',
       typePaths: ['src/**/*.graphql'],
       definitions: {
-        path: join(
-          process.cwd(),
-          'src/schema/graphql.schema.ts',
-        ),
+        path: join(process.cwd(), 'src/schema/graphql.schema.ts'),
       },
     }),
     DatabaseModule,

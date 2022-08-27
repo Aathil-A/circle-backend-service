@@ -10,11 +10,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get('POSTGRES_HOST')|| 'localhost',
-        port:configService.get('POSTGRES_PORT')||  5434,
-        username: configService.get('POSTGRES_USER')|| 'postgres',
-        password: configService.get('POSTGRES_PASSWORD')|| 'postgres',
-        database: configService.get('POSTGRES_DB')|| 'example-db',
+        host: configService.get('POSTGRES_HOST') || 'localhost',
+        port: configService.get('POSTGRES_PORT') || 5434,
+        username: configService.get('POSTGRES_USER') || 'postgres',
+        password: configService.get('POSTGRES_PASSWORD') || 'postgres',
+        database: configService.get('POSTGRES_DB') || 'example-db',
         entities: [
           __dirname + '/../../**/*.entity.ts',
           __dirname + '/../../**/*.entity.js',
