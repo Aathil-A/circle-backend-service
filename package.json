@@ -37,6 +37,7 @@
     "apollo-server-express": "^3.10.0",
     "aws-sdk": "^2.1204.0",
     "dataloader": "^2.1.0",
+    "firebase": "^9.9.3",
     "firebase-admin": "^11.0.1",
     "graphql": "^16.5.0",
     "nestjs-s3": "^1.0.1",
