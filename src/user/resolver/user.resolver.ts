@@ -22,7 +22,7 @@ export class UserResolver {
 
   @Query()
   async getUser(@Args('id') id: string) {
-    return await this.userService.findOne({ where: id });
+    return await this.userService.findOne({ id });
   }
 
   @Mutation()
