@@ -15,8 +15,8 @@ export class AgentService {
     private agentRepo: Repository<Agent>,
   ) {}
 
-  async findOne(where:ObjectLiteral) {
-    return await this.agentRepo.findOne({where:where, relations:{agentDestination:true}});
+  async findOne(queryObj:ObjectLiteral) {
+    return await this.agentRepo.findOne(queryObj);
   }
 
   async findOneOrFail(

@@ -4,6 +4,7 @@ export interface CreateQuotationInput {
   userId: string;
   enquiryId: string;
   agentId: string;
-  fileLink: string;
-  notes: string;
+  price: number;
+  fileLink?: string;
+  notes?: string;
 }

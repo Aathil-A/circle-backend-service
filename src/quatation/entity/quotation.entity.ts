@@ -6,20 +6,23 @@ export class Quotation extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  userId: string;
+  @Column('uuid')
+  userId!: string;
+
+  @Column('uuid')
+  enquiryId!: string;
+
+  @Column('uuid')
+  agentId!: string;
 
   @Column()
-  enquiryId: string;
+  price!: number;
 
-  @Column()
-  agentId: string;
+  @Column({ nullable: true })
+  fileLink?: string;
 
-  @Column()
-  fileLink: string;
-
-  @Column()
-  notes: string;
+  @Column({ nullable: true })
+  notes?: string;
 
   @Column({ default: QuotationStatus.PENDING })
   status: QuotationStatus;

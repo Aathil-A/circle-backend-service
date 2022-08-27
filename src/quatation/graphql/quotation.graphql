@@ -6,12 +6,14 @@ type Quotation {
   fileLink: String
   notes: String
   status: String
+  price: Int
 }
 
 input CreateQuotationInput {
-  userId: String
-  enquiryId: String
-  agentId: String
+  userId: String!
+  enquiryId: String!
+  agentId: String!
+  price: Int!
   fileLink: String
   notes: String
 }
@@ -22,9 +24,16 @@ enum QuotationStatus {
   PENDING
 }
 
+input EditQuotationInput {
+  status: QuotationStatus
+  id: String
+}
+
 input QuotationQueryOption {
+  id: String
   userId: String
   agentId: String
+  enquiryId: String
   status: QuotationStatus
 }
 
@@ -34,4 +43,5 @@ type Query {
 
 type Mutation {
   createQuotation(input: CreateQuotationInput!): Quotation
+  editQuotation(input: EditQuotationInput!): Quotation
 }
