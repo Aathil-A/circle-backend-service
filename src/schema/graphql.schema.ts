@@ -22,6 +22,10 @@ export interface UpdateAgentInput {
     firebaseId?: Nullable<string>;
 }
 
+export interface CreateDestinationInput {
+    name: string;
+}
+
 export interface CreateUserInput {
     name: string;
     email: string;
@@ -47,6 +51,8 @@ export interface IQuery {
     getAgents(): Nullable<Nullable<Agent>[]> | Promise<Nullable<Nullable<Agent>[]>>;
     getAgent(id: string): Nullable<Agent> | Promise<Nullable<Agent>>;
     health(): Nullable<string> | Promise<Nullable<string>>;
+    getDestinations(): Nullable<Nullable<Destination>[]> | Promise<Nullable<Nullable<Destination>[]>>;
+    getDestination(id: string): Nullable<Destination> | Promise<Nullable<Destination>>;
     getUsers(): Nullable<Nullable<User>[]> | Promise<Nullable<Nullable<User>[]>>;
     getUser(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
@@ -55,9 +61,15 @@ export interface IMutation {
     createAgent(input?: Nullable<CreateAgentInput>): Nullable<Agent> | Promise<Nullable<Agent>>;
     updateAgent(input?: Nullable<UpdateAgentInput>): Nullable<Agent> | Promise<Nullable<Agent>>;
     deleteAgent(id: string): Nullable<Agent> | Promise<Nullable<Agent>>;
+    createDestination(input: CreateDestinationInput): Nullable<Destination> | Promise<Nullable<Destination>>;
     createUser(input: CreateUserInput): Nullable<User> | Promise<Nullable<User>>;
     updateUser(id: string, input: UpdateUserInput): Nullable<User> | Promise<Nullable<User>>;
     deleteUser(id: string): Nullable<User> | Promise<Nullable<User>>;
+}
+
+export interface Destination {
+    id?: Nullable<string>;
+    name?: Nullable<string>;
 }
 
 export interface User {

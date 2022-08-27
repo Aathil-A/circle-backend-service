@@ -1,5 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CreateAgentInput } from '../../schema/graphql.schema';
+import { CreateAgentInput, UpdateAgentInput } from '../../schema/graphql.schema';
 import { AgentService } from '../service/agent.service';
 
 @Resolver()
