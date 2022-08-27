@@ -6,12 +6,14 @@ type Quotation {
   fileLink: String
   notes: String
   status: String
+  price: Int
 }
 
 input CreateQuotationInput {
   userId: String!
   enquiryId: String!
   agentId: String!
+  price: Int!
   fileLink: String
   notes: String
 }

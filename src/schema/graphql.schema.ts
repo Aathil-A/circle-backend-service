@@ -63,6 +63,7 @@ export interface CreateQuotationInput {
     userId: string;
     enquiryId: string;
     agentId: string;
+    price: number;
     fileLink?: Nullable<string>;
     notes?: Nullable<string>;
 }
@@ -172,6 +173,7 @@ export interface Quotation {
     fileLink?: Nullable<string>;
     notes?: Nullable<string>;
     status?: Nullable<string>;
+    price?: Nullable<number>;
 }
 
 export interface User {
