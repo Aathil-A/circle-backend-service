@@ -1,25 +1,33 @@
 import BaseEntity from '../../common/utils/base.entity';
-import { User } from 'src/user/entity/user.entity';
+import { User } from '../../user/entity/user.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Destination } from '../../destination/entity/destination.entity';
 
 @Entity()
 export class Enquiry extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('uuid')
   userId!: string;
 
-  @Column()
+  @ManyToOne(() => User, (user) => user.enquiry)
+  user!: User;
+
+  @Column('uuid')
   destinationId!: string;
+
+  @ManyToOne(() => Destination, (destination) => destination.enquiry)
+  destination!: Destination;
 
   @Column()
   pickUpPoint!: string;

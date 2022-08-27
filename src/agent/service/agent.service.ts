@@ -31,10 +31,10 @@ export class AgentService {
       address: input.address,
       phone: input.phone,
     } as Agent;
-      return this.save(newAgent);
+    return this.save(newAgent);
   }
-    async save(input: Partial<Agent>) {
-        return await this.agentRepo.save(input);
+  async save(input: Partial<Agent>) {
+    return await this.agentRepo.save(input);
   }
 
   async remove() {}
