@@ -7,9 +7,7 @@ import { S3Operation } from '../enum/s3';
 
 @Injectable()
 export class S3Service {
-  constructor(
-    @InjectS3() private readonly s3: S3,
-  ) {}
+  constructor(@InjectS3() private readonly s3: S3) {}
 
   /**
    * To get a signed url for performing an S3 operation.
@@ -19,14 +17,12 @@ export class S3Service {
    */
   async getPresignedUrl(input: ObjectLiteral, operation: S3Operation) {
     //TODO: If possible, narrow down input type based on operation.
-    const s3Bucket = 'circle-bucket-travel'
+    const s3Bucket = 'circle-bucket-travel';
     const params = {
-     
-      Key:"test",
+      Key: 'test',
       Bucket: s3Bucket,
       Expires: 60 * 20, // 5 minutes validity
     };
     return await this.s3.getSignedUrlPromise(operation, params);
   }
-
 }

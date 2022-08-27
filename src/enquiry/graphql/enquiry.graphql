@@ -6,7 +6,7 @@ enum HotelStar {
     Three
     Four
     Five
-    No Preference
+    NoPreference
 }
 
 type Enquiry{
@@ -39,7 +39,8 @@ input CreateEnquiryInput{
 
 type Query {
     getEnquiry(id: String!): Enquiry
-    getEnquiries: [Enquiry]
+    getCustomerEnquiries(userId: String!): [Enquiry]
+    getDestinationEnquiries(destinationId: String!): [Enquiry]
 }
 
 type Mutation {
