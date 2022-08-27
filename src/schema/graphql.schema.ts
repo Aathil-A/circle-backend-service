@@ -8,6 +8,26 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export enum QuotationStatus {
+    ACCEPTED = "ACCEPTED",
+    REJECTED = "REJECTED",
+    PENDING = "PENDING"
+}
+
+export interface CreateQuotationInput {
+    userId?: Nullable<string>;
+    enquiryId?: Nullable<string>;
+    agentId?: Nullable<string>;
+    fileLink?: Nullable<string>;
+    notes?: Nullable<string>;
+}
+
+export interface QuotationQueryOption {
+    userId?: Nullable<string>;
+    agentId?: Nullable<string>;
+    status?: Nullable<QuotationStatus>;
+}
+
 export interface CreateUserInput {
     name: string;
     email: string;
@@ -22,8 +42,26 @@ export interface UpdateUserInput {
 
 export interface IQuery {
     health(): Nullable<string> | Promise<Nullable<string>>;
+    getQuotations(quotationQueryOption?: Nullable<QuotationQueryOption>): Nullable<Nullable<Quotation>[]> | Promise<Nullable<Nullable<Quotation>[]>>;
     getUsers(): Nullable<Nullable<User>[]> | Promise<Nullable<Nullable<User>[]>>;
     getUser(id: string): Nullable<User> | Promise<Nullable<User>>;
+}
+
+export interface Quotation {
+    id?: Nullable<string>;
+    userId?: Nullable<string>;
+    enquiryId?: Nullable<string>;
+    agentId?: Nullable<string>;
+    fileLink?: Nullable<string>;
+    notes?: Nullable<string>;
+    status?: Nullable<string>;
+}
+
+export interface IMutation {
+    createQuotation(input: CreateQuotationInput): Nullable<Quotation> | Promise<Nullable<Quotation>>;
+    createUser(input: CreateUserInput): Nullable<User> | Promise<Nullable<User>>;
+    updateUser(id: string, input: UpdateUserInput): Nullable<User> | Promise<Nullable<User>>;
+    deleteUser(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
 
 export interface User {
@@ -31,12 +69,6 @@ export interface User {
     email?: Nullable<string>;
     password?: Nullable<string>;
     name?: Nullable<string>;
-}
-
-export interface IMutation {
-    createUser(input: CreateUserInput): Nullable<User> | Promise<Nullable<User>>;
-    updateUser(id: string, input: UpdateUserInput): Nullable<User> | Promise<Nullable<User>>;
-    deleteUser(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
 
 type Nullable<T> = T | null;
