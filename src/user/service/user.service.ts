@@ -32,7 +32,7 @@ export class UserService {
   }
 
   async update(id: string, input: Partial<User>) {
-    let user = await this.findOne({ where: { id } });
+    let user = await this.findOne( { id });
     if (!user) {
       return null;
     }
