@@ -9,6 +9,7 @@ import { join } from 'path';
 import { AppResolver } from './app.resolver';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { DatabaseModule } from './common/database/database.module';
+import { DestinationModule } from './destination/destination.module';
 import { AgentModule } from './agent/agent.module';
 import { FileUploadModule } from './fileUpload/fileupload.module';
 
@@ -38,6 +39,7 @@ import { FileUploadModule } from './fileUpload/fileupload.module';
     }),
     DatabaseModule,
     UserModule,
+    DestinationModule,
     AgentModule,
     FileUploadModule,
   ],
