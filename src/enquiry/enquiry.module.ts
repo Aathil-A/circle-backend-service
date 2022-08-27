@@ -6,6 +6,6 @@ import { EnquiryService } from './service/enquiry.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Enquiry])],
-  providers: [EnquiryService, EnquiryService, EnquiryResolver],
+  providers: [EnquiryService, EnquiryResolver],
 })
 export class EnquiryModule {}

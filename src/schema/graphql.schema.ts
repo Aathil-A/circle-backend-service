@@ -14,8 +14,7 @@ export enum HotelStar {
     Three = "Three",
     Four = "Four",
     Five = "Five",
-    No = "No",
-    Preference = "Preference"
+    NoPreference = "NoPreference"
 }
 
 export enum QuotationStatus {
@@ -97,7 +96,8 @@ export interface IQuery {
     getDestinations(): Nullable<Nullable<Destination>[]> | Promise<Nullable<Nullable<Destination>[]>>;
     getDestination(id: string): Nullable<Destination> | Promise<Nullable<Destination>>;
     getEnquiry(id: string): Nullable<Enquiry> | Promise<Nullable<Enquiry>>;
-    getEnquiries(): Nullable<Nullable<Enquiry>[]> | Promise<Nullable<Nullable<Enquiry>[]>>;
+    getCustomerEnquiries(userId: string): Nullable<Nullable<Enquiry>[]> | Promise<Nullable<Nullable<Enquiry>[]>>;
+    getDestinationEnquiries(destinationId: string): Nullable<Nullable<Enquiry>[]> | Promise<Nullable<Nullable<Enquiry>[]>>;
     getPresignedUrl(): Nullable<GetPreSignedUrlOutput> | Promise<Nullable<GetPreSignedUrlOutput>>;
     getQuotations(quotationQueryOption?: Nullable<QuotationQueryOption>): Nullable<Nullable<Quotation>[]> | Promise<Nullable<Nullable<Quotation>[]>>;
     getUsers(): Nullable<Nullable<User>[]> | Promise<Nullable<Nullable<User>[]>>;

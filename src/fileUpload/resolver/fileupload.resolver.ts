@@ -4,19 +4,13 @@ import { S3Service } from '../service/s3.service';
 
 @Resolver()
 export class FileUploadResolver {
-    constructor(
-        private s3Service:S3Service,
-    ) { }
-    
+  constructor(private s3Service: S3Service) {}
 
-  
-    @Query()
-    async getPresignedUrl() {
-        const input = {
-            name:"asdf"
-        }
-      return await this.s3Service.getPresignedUrl(input,S3Operation.putObject);
-    }
-
-
+  @Query()
+  async getPresignedUrl() {
+    const input = {
+      name: 'asdf',
+    };
+    return await this.s3Service.getPresignedUrl(input, S3Operation.putObject);
+  }
 }

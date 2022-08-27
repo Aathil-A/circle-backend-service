@@ -1,4 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { ObjectLiteral } from 'typeorm';
 import { CreateEnquiryInput } from '../../schema/graphql.schema';
 import { EnquiryService } from '../service/enquiry.service';
 
@@ -12,9 +13,20 @@ export class EnquiryResolver {
   }
 
   @Query()
-  async getEnquiries() {
-    return await this.enquiryService.find();
+  async getCustomerEnquiries(@Args('userId') userId: string) {
+    const where: ObjectLiteral = {
+      userId: userId,
+    };
+    return await this.enquiryService.find(where);
   }
+
+  // @Query()
+  // async getDestinationEnquiries() {
+  //   const where: ObjectLiteral = {
+  //     userId: userId
+  //   }
+  //   return await this.enquiryService.find();
+  // }
 
   @Mutation()
   async createEnquiry(@Args('input') input: CreateEnquiryInput) {
