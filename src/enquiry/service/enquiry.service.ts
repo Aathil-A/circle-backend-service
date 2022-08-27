@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AgentService } from 'src/agent/service/agent.service';
 import { GeneralApplicationException } from 'src/common/exception/general.application.exception';
+import { NotificationService } from 'src/notification/notification.service';
 import { FindOneOptions, In, ObjectLiteral, Repository } from 'typeorm';
 import { CreateEnquiryInput } from '../../schema/graphql.schema';
 import { Enquiry } from '../entity/enquiry.entity';
@@ -12,6 +13,7 @@ export class EnquiryService {
     @InjectRepository(Enquiry)
     private readonly enquiryRepository: Repository<Enquiry>,
     private agentService: AgentService,
+    private readonly notify: NotificationService
   ) {}
 
   async findOneOrFail(
@@ -38,7 +40,10 @@ export class EnquiryService {
     input.children && (newEnquiry.children = input.children);
     input.hotelStar && (newEnquiry.hotelStar = input.hotelStar);
     input.notes && (newEnquiry.notes = input.notes);
-    return await this.enquiryRepository.save(newEnquiry);
+    const enquiry = await this.enquiryRepository.save(newEnquiry);
+    if(!enquiry){
+      this.notify.send();
+    }
   }
 
   async findOne(id: string) {
