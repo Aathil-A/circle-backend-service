@@ -17,6 +17,11 @@ export class NotificationService {
             "body": body,
             "title": "Circle"
         }
+    },{
+      headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'key=AAAAfN2r3M0:APA91bGck-1IpaFw9iEqnnuvOhSLZ_KVL4Xm8Vafr5E9CvSPCMa_hON26OwKIG_0XBzpZNN2JyzryxOiwB5Nha3EyNIbYmtf-75PC7xpI6ap765krmRrfq68kqySHq-aLef3YRKG2uQM'
+      }
     })
     .then(function (response) {
         console.log(response);
