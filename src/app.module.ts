@@ -10,6 +10,7 @@ import { AppResolver } from './app.resolver';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { DatabaseModule } from './common/database/database.module';
 import { DestinationModule } from './destination/destination.module';
+import { AgentModule } from './agent/agent.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { DestinationModule } from './destination/destination.module';
     DatabaseModule,
     UserModule,
     DestinationModule,
+    AgentModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],
