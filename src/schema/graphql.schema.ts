@@ -73,6 +73,7 @@ export interface EditQuotationInput {
 }
 
 export interface QuotationQueryOption {
+    id?: Nullable<string>;
     userId?: Nullable<string>;
     agentId?: Nullable<string>;
     status?: Nullable<QuotationStatus>;
