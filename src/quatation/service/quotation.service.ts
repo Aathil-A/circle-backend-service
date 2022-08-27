@@ -32,6 +32,9 @@ export class QuotationService {
         ...(quotationQueryOption.status && {
           status: quotationQueryOption.status,
         }),
+        ...(quotationQueryOption.enquiryId && {
+          enquiryId: quotationQueryOption.enquiryId,
+        }),
       },
     });
   }

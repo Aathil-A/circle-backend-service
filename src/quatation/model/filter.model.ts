@@ -5,4 +5,5 @@ export interface QuotationQueryOption {
   userId?: string;
   agentId?: string;
   status?: QuotationStatus;
+  enquiryId?: string;
 }

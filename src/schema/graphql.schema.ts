@@ -76,6 +76,7 @@ export interface QuotationQueryOption {
     id?: Nullable<string>;
     userId?: Nullable<string>;
     agentId?: Nullable<string>;
+    enquiryId?: Nullable<string>;
     status?: Nullable<QuotationStatus>;
 }
 

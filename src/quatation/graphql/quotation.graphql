@@ -31,6 +31,7 @@ input QuotationQueryOption {
   id: String
   userId: String
   agentId: String
+  enquiryId: String
   status: QuotationStatus
 }
 
