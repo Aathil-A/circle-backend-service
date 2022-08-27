@@ -20,12 +20,11 @@ export class S3Service {
   async getPresignedUrl(input: ObjectLiteral, operation: S3Operation) {
     //TODO: If possible, narrow down input type based on operation.
     const s3Bucket = 'circle-bucket-travel';
-    let output: GetPreSignedUrlOutput = {
-      key:uuid()
-    }
+    const output: GetPreSignedUrlOutput = {
+      key: uuid(),
+    };
     const params = {
-     
-      Key:output.key,
+      Key: output.key,
       Bucket: s3Bucket,
       Expires: 60 * 20, // 5 minutes validity
     };

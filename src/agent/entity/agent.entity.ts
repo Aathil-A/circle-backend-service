@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import BaseEntity from '../../common/utils/base.entity';
+import { AgentDestination } from './agent.destination.entity';
 
 @Entity()
 export class Agent extends BaseEntity {
@@ -20,4 +21,13 @@ export class Agent extends BaseEntity {
 
   @Column({ default: false })
   isVerified: boolean;
+
+  @OneToMany(
+    () => AgentDestination,
+    (agentDestination) => agentDestination.agent,
+    {
+      cascade: true,
+    },
+  )
+  public agentDestination!: AgentDestination[];
 }

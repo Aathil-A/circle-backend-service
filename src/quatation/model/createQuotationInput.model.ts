@@ -1,9 +1,9 @@
-import { QuotationStatus } from "../enums/quotation.status";
+import { QuotationStatus } from '../enums/quotation.status';
 
 export interface CreateQuotationInput {
-    userId: string;
-    enquiryId: string;
-    agentId: string;
-    fileLink: string;
-    notes: string;
-  }
+  userId: string;
+  enquiryId: string;
+  agentId: string;
+  fileLink: string;
+  notes: string;
+}

@@ -23,25 +23,25 @@ export enum QuotationStatus {
     PENDING = "PENDING"
 }
 
-export class CreateAgentInput {
+export interface CreateAgentInput {
     name: string;
     address: string;
     phone: string;
     firebaseId?: Nullable<string>;
 }
 
-export class UpdateAgentInput {
+export interface UpdateAgentInput {
     name: string;
     address: string;
     phone: string;
     firebaseId?: Nullable<string>;
 }
 
-export class CreateDestinationInput {
+export interface CreateDestinationInput {
     name: string;
 }
 
-export class CreateEnquiryInput {
+export interface CreateEnquiryInput {
     userId: string;
     pickUpPoint: string;
     destinationId: string;
@@ -54,7 +54,7 @@ export class CreateEnquiryInput {
     notes?: Nullable<string>;
 }
 
-export class CreateQuotationInput {
+export interface CreateQuotationInput {
     userId?: Nullable<string>;
     enquiryId?: Nullable<string>;
     agentId?: Nullable<string>;
@@ -62,37 +62,38 @@ export class CreateQuotationInput {
     notes?: Nullable<string>;
 }
 
-export class QuotationQueryOption {
+export interface QuotationQueryOption {
     userId?: Nullable<string>;
     agentId?: Nullable<string>;
     status?: Nullable<QuotationStatus>;
 }
 
-export class CreateUserInput {
+export interface CreateUserInput {
     name: string;
     email: string;
     password: string;
 }
 
-export class LoginInput {
+export interface LoginInput {
     email: string;
     password: string;
 }
 
-export class UpdateUserInput {
+export interface UpdateUserInput {
     name?: Nullable<string>;
     email?: Nullable<string>;
     password?: Nullable<string>;
     firebaseId?: Nullable<string>;
 }
 
-export class Agent {
+export interface Agent {
     id?: Nullable<string>;
     name?: Nullable<string>;
     address?: Nullable<string>;
     phone?: Nullable<string>;
     firebaseId?: Nullable<string>;
     isVerified?: Nullable<boolean>;
+    destinations?: Nullable<Nullable<Destination>[]>;
 }
 
 export interface IQuery {
@@ -103,41 +104,33 @@ export interface IQuery {
     getDestination(id: string): Nullable<Destination> | Promise<Nullable<Destination>>;
     getEnquiry(id: string): Nullable<Enquiry> | Promise<Nullable<Enquiry>>;
     getCustomerEnquiries(userId: string): Nullable<Nullable<Enquiry>[]> | Promise<Nullable<Nullable<Enquiry>[]>>;
-    getDestinationEnquiries(destinationId: string): Nullable<Nullable<Enquiry>[]> | Promise<Nullable<Nullable<Enquiry>[]>>;
+    getAgentEnquiries(): Nullable<Nullable<Enquiry>[]> | Promise<Nullable<Nullable<Enquiry>[]>>;
     getPresignedUrl(): Nullable<GetPreSignedUrlOutput> | Promise<Nullable<GetPreSignedUrlOutput>>;
     getQuotations(quotationQueryOption?: Nullable<QuotationQueryOption>): Nullable<Nullable<Quotation>[]> | Promise<Nullable<Nullable<Quotation>[]>>;
     getUsers(): Nullable<Nullable<User>[]> | Promise<Nullable<Nullable<User>[]>>;
     getUser(id: string): Nullable<User> | Promise<Nullable<User>>;
+    loginUser(input?: Nullable<LoginInput>): Nullable<User> | Promise<Nullable<User>>;
 }
 
-export abstract class IMutation {
-    abstract createAgent(input?: Nullable<CreateAgentInput>): Nullable<Agent> | Promise<Nullable<Agent>>;
-
-    abstract updateAgent(input?: Nullable<UpdateAgentInput>): Nullable<Agent> | Promise<Nullable<Agent>>;
-
-    abstract deleteAgent(id: string): Nullable<Agent> | Promise<Nullable<Agent>>;
-
-    abstract createDestination(input: CreateDestinationInput): Nullable<Destination> | Promise<Nullable<Destination>>;
-
-    abstract createEnquiry(input?: Nullable<CreateEnquiryInput>): Nullable<Enquiry> | Promise<Nullable<Enquiry>>;
-
-    abstract deleteEnquiry(id: string): Nullable<boolean> | Promise<Nullable<boolean>>;
-
-    abstract createQuotation(input: CreateQuotationInput): Nullable<Quotation> | Promise<Nullable<Quotation>>;
-
-    abstract createUser(input: CreateUserInput): Nullable<User> | Promise<Nullable<User>>;
-
-    abstract updateUser(id: string, input: UpdateUserInput): Nullable<User> | Promise<Nullable<User>>;
-
-    abstract deleteUser(id: string): Nullable<User> | Promise<Nullable<User>>;
+export interface IMutation {
+    createAgent(input?: Nullable<CreateAgentInput>): Nullable<Agent> | Promise<Nullable<Agent>>;
+    updateAgent(input?: Nullable<UpdateAgentInput>): Nullable<Agent> | Promise<Nullable<Agent>>;
+    deleteAgent(id: string): Nullable<Agent> | Promise<Nullable<Agent>>;
+    createDestination(input: CreateDestinationInput): Nullable<Destination> | Promise<Nullable<Destination>>;
+    createEnquiry(input?: Nullable<CreateEnquiryInput>): Nullable<Enquiry> | Promise<Nullable<Enquiry>>;
+    deleteEnquiry(id: string): Nullable<boolean> | Promise<Nullable<boolean>>;
+    createQuotation(input: CreateQuotationInput): Nullable<Quotation> | Promise<Nullable<Quotation>>;
+    createUser(input: CreateUserInput): Nullable<User> | Promise<Nullable<User>>;
+    updateUser(id: string, input: UpdateUserInput): Nullable<User> | Promise<Nullable<User>>;
+    deleteUser(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
 
-export class Destination {
+export interface Destination {
     id?: Nullable<string>;
     name?: Nullable<string>;
 }
 
-export class Enquiry {
+export interface Enquiry {
     id?: Nullable<string>;
     user?: Nullable<User>;
     pickUpPoint?: Nullable<string>;
@@ -152,12 +145,12 @@ export class Enquiry {
     createdAt?: Nullable<Date>;
 }
 
-export class GetPreSignedUrlOutput {
+export interface GetPreSignedUrlOutput {
     key?: Nullable<string>;
     url?: Nullable<string>;
 }
 
-export class Quotation {
+export interface Quotation {
     id?: Nullable<string>;
     userId?: Nullable<string>;
     enquiryId?: Nullable<string>;
@@ -167,7 +160,7 @@ export class Quotation {
     status?: Nullable<string>;
 }
 
-export class User {
+export interface User {
     id?: Nullable<string>;
     email?: Nullable<string>;
     password?: Nullable<string>;

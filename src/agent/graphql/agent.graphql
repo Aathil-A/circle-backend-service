@@ -5,6 +5,7 @@ type Agent{
     phone: String
     firebaseId: String
     isVerified: Boolean
+    destinations: [Destination]
 }
 
 
