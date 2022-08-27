@@ -25,9 +25,10 @@ export class UserService {
   }
 
   async findOne(where:ObjectLiteral) {
-    return await this.userRepository.findOne({
+    const user= await this.userRepository.findOne({
       where,
     });
+    return user;
   }
 
   async update(id: string, input: Partial<User>) {
