@@ -9,6 +9,11 @@ enum HotelStar {
     NoPreference
 }
 
+enum EnquiryStatus {
+    QuotationPending
+    QuotationSent
+}
+
 type Enquiry{
     id: String
     user: User

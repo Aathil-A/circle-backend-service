@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { EnquiryService } from 'src/enquiry/service/enquiry.service';
+import { EnquiryStatus } from 'src/schema/graphql.schema';
 import { Repository } from 'typeorm';
 import { Quotation } from '../entity/quotation.entity';
 import { CreateQuotationInput } from '../model/createQuotationInput.model';
@@ -11,9 +13,11 @@ export class QuotationService {
   constructor(
     @InjectRepository(Quotation)
     private readonly quotationRepo: Repository<Quotation>,
+    private enquiryService: EnquiryService,
   ) {}
 
   async createQuatation(createQuatationInput: CreateQuotationInput) {
+    await this.enquiryService.update(createQuatationInput.enquiryId, EnquiryStatus.QuotationSent)
     return await this.quotationRepo.save(createQuatationInput);
   }
 
