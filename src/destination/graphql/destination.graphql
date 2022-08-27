@@ -1,0 +1,17 @@
+type Destination {
+  id: ID
+  name: String
+}
+
+input CreateDestinationInput {
+  name: String!
+}
+
+type Query {
+  getDestinations: [Destination]
+  getDestination(id: ID!): Destination
+}
+
+type Mutation {
+  createDestination(input: CreateDestinationInput!): Destination
+}
