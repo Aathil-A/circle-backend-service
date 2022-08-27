@@ -17,6 +17,11 @@ export enum HotelStar {
     NoPreference = "NoPreference"
 }
 
+export enum EnquiryStatus {
+    QuotationPending = "QuotationPending",
+    QuotationSent = "QuotationSent"
+}
+
 export enum QuotationStatus {
     ACCEPTED = "ACCEPTED",
     REJECTED = "REJECTED",

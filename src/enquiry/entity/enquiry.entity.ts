@@ -11,6 +11,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Destination } from '../../destination/entity/destination.entity';
+import { EnquiryStatus } from '../../schema/graphql.schema';
 
 @Entity()
 export class Enquiry extends BaseEntity {
@@ -40,6 +41,9 @@ export class Enquiry extends BaseEntity {
 
   @Column()
   budget!: number;
+
+  @Column({default: EnquiryStatus.QuotationPending})
+  status!: string;
 
   @Column()
   adults!: number;

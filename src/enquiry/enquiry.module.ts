@@ -8,5 +8,6 @@ import { EnquiryService } from './service/enquiry.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Enquiry]), AgentModule],
   providers: [EnquiryService, EnquiryResolver],
+  exports: [EnquiryService]
 })
 export class EnquiryModule {}

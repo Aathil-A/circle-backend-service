@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { AgentService } from 'src/agent/service/agent.service';
 import { GeneralApplicationException } from 'src/common/exception/general.application.exception';
 import { FindOneOptions, In, ObjectLiteral, Repository } from 'typeorm';
-import { CreateEnquiryInput } from '../../schema/graphql.schema';
+import { CreateEnquiryInput, EnquiryStatus } from '../../schema/graphql.schema';
 import { Enquiry } from '../entity/enquiry.entity';
 
 @Injectable()
@@ -41,6 +41,12 @@ export class EnquiryService {
     return await this.enquiryRepository.save(newEnquiry);
   }
 
+  async update(id: string, status: EnquiryStatus) {
+    const enquiry = await this.findOneOrFail(id)
+    return await this.enquiryRepository.update(enquiry.id, {status: status});
+  }
+
+
   async findOne(id: string) {
     const enquiry = await this.findOneOrFail({
       where: { id: id },
@@ -68,7 +74,8 @@ export class EnquiryService {
    const destinationIds = agent.agentDestination.map(eachDestination => {return eachDestination.destinationId})
    const enquiries = await this.enquiryRepository.find({
      where: {
-       destinationId: In(destinationIds)
+       destinationId: In(destinationIds),
+       status: EnquiryStatus.QuotationPending,
      },
      relations:{
        user:true
