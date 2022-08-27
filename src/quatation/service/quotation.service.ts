@@ -4,8 +4,6 @@ import { Repository } from 'typeorm';
 import { Quotation } from '../entity/quotation.entity';
 import { CreateQuotationInput } from '../model/createQuotationInput.model';
 import { QuotationQueryOption } from '../model/filter.model';
-import { QuotationRepository } from '../repository/quatation.repository';
-import { QuatationResolver } from '../resolvers/quotation.resolver';
 
 @Injectable()
 export class QuotationService {
@@ -21,15 +19,15 @@ export class QuotationService {
   async getQuotations(quotationQueryOption: QuotationQueryOption) {
     return await this.quotationRepo.find({
       where: {
-        // ...(quotationQueryOption.agentId && ({
-        //   agentId: quotationQueryOption.agentId,
-        // })),
+        ...(quotationQueryOption.agentId && {
+          agentId: quotationQueryOption.agentId,
+        }),
         ...(quotationQueryOption.userId && {
           userId: quotationQueryOption.userId,
         }),
-        // ...(quotationQueryOption.status && {
-        //   status: quotationQueryOption.status,
-        // }),
+        ...(quotationQueryOption.status && {
+          status: quotationQueryOption.status,
+        }),
       },
     });
   }
