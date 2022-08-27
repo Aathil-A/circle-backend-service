@@ -17,12 +17,12 @@ export class EnquiryResolver {
     const where: ObjectLiteral = {
       userId: userId,
     };
-    return await this.enquiryService.find(where);
+    return await this.enquiryService.getCustomerEnquiries(where);
   }
 
   @Query()
-  async getAgentEnquiries() {
-    return await this.enquiryService.find();
+  async getAgentEnquiries(@Args('agentId') agentId: string) {
+    return await this.enquiryService.getAgentEnquiries(agentId);
   }
 
   @Mutation()

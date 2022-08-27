@@ -39,7 +39,7 @@ export class AgentResolver {
 
   @Query()
   async getAgent(@Args('id') id: string) {
-    return await this.agentService.findOne({ where: id });
+    return await this.agentService.findOne({ id: id });
   }
 
   @Mutation()
