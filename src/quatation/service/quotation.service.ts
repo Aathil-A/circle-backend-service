@@ -20,6 +20,9 @@ export class QuotationService {
   async getQuotations(quotationQueryOption: QuotationQueryOption) {
     return await this.quotationRepo.find({
       where: {
+        ...(quotationQueryOption.id && {
+          id: quotationQueryOption.id,
+        }),
         ...(quotationQueryOption.agentId && {
           agentId: quotationQueryOption.agentId,
         }),
