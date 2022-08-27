@@ -6,16 +6,17 @@ import { QuotationService } from '../service/quotation.service';
 
 @Resolver()
 export class QuatationResolver {
-  constructor(
-  private readonly quotationService: QuotationService,) {}
+  constructor(private readonly quotationService: QuotationService) {}
 
   @Mutation()
   async createQuotation(@Args('input') input: CreateQuotationInput) {
-    return  this.quotationService.createQuatation(input);
+    return this.quotationService.createQuatation(input);
   }
 
   @Query()
-  async getQuotations(@Args('quotationQueryOption') quotationQueryOption: QuotationQueryOption) {
+  async getQuotations(
+    @Args('quotationQueryOption') quotationQueryOption: QuotationQueryOption,
+  ) {
     return await this.quotationService.getQuotations(quotationQueryOption);
   }
 }

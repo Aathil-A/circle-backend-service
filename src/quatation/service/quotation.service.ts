@@ -18,7 +18,7 @@ export class QuotationService {
     return await this.quotationRepo.save(createQuatationInput);
   }
 
-  async getQuotations(quotationQueryOption: QuotationQueryOption){
+  async getQuotations(quotationQueryOption: QuotationQueryOption) {
     return await this.quotationRepo.find({
       where: {
         // ...(quotationQueryOption.agentId && ({

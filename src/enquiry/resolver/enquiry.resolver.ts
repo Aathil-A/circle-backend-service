@@ -20,13 +20,10 @@ export class EnquiryResolver {
     return await this.enquiryService.find(where);
   }
 
-  // @Query()
-  // async getDestinationEnquiries() {
-  //   const where: ObjectLiteral = {
-  //     userId: userId
-  //   }
-  //   return await this.enquiryService.find();
-  // }
+  @Query()
+  async getAgentEnquiries() {
+    return await this.enquiryService.find();
+  }
 
   @Mutation()
   async createEnquiry(@Args('input') input: CreateEnquiryInput) {

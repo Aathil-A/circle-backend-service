@@ -50,7 +50,7 @@ export class EnquiryService {
     return enquiry;
   }
 
-  async find(where: ObjectLiteral) {
+  async find(where?: ObjectLiteral) {
     const enquiry = await this.enquiryRepository.find({
       where: where,
       relations: {

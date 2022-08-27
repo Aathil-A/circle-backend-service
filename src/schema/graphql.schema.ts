@@ -104,7 +104,7 @@ export interface IQuery {
     getDestination(id: string): Nullable<Destination> | Promise<Nullable<Destination>>;
     getEnquiry(id: string): Nullable<Enquiry> | Promise<Nullable<Enquiry>>;
     getCustomerEnquiries(userId: string): Nullable<Nullable<Enquiry>[]> | Promise<Nullable<Nullable<Enquiry>[]>>;
-    getDestinationEnquiries(destinationId: string): Nullable<Nullable<Enquiry>[]> | Promise<Nullable<Nullable<Enquiry>[]>>;
+    getAgentEnquiries(): Nullable<Nullable<Enquiry>[]> | Promise<Nullable<Nullable<Enquiry>[]>>;
     getPresignedUrl(): Nullable<GetPreSignedUrlOutput> | Promise<Nullable<GetPreSignedUrlOutput>>;
     getQuotations(quotationQueryOption?: Nullable<QuotationQueryOption>): Nullable<Nullable<Quotation>[]> | Promise<Nullable<Nullable<Quotation>[]>>;
     getUsers(): Nullable<Nullable<User>[]> | Promise<Nullable<Nullable<User>[]>>;

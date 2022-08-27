@@ -40,7 +40,7 @@ input CreateEnquiryInput{
 type Query {
     getEnquiry(id: String!): Enquiry
     getCustomerEnquiries(userId: String!): [Enquiry]
-    getDestinationEnquiries(destinationId: String!): [Enquiry]
+    getAgentEnquiries: [Enquiry]
 }
 
 type Mutation {
