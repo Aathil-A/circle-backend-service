@@ -7,5 +7,6 @@ import { AgentResolver } from './resolver/agent.resolver';
 @Module({
   imports: [TypeOrmModule.forFeature([Agent])],
   providers: [AgentService, AgentResolver],
+  exports: [AgentService]
 })
 export class AgentModule {}

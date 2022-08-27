@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { AgentService } from 'src/agent/service/agent.service';
 import { GeneralApplicationException } from 'src/common/exception/general.application.exception';
-import { FindOneOptions, ObjectLiteral, Repository } from 'typeorm';
+import { FindOneOptions, In, ObjectLiteral, Repository } from 'typeorm';
 import { CreateEnquiryInput } from '../../schema/graphql.schema';
 import { Enquiry } from '../entity/enquiry.entity';
 
@@ -10,6 +11,7 @@ export class EnquiryService {
   constructor(
     @InjectRepository(Enquiry)
     private readonly enquiryRepository: Repository<Enquiry>,
+    private agentService: AgentService,
   ) {}
 
   async findOneOrFail(
@@ -50,7 +52,7 @@ export class EnquiryService {
     return enquiry;
   }
 
-  async find(where?: ObjectLiteral) {
+  async getCustomerEnquiries(where: ObjectLiteral) {
     const enquiry = await this.enquiryRepository.find({
       where: where,
       relations: {
@@ -59,6 +61,20 @@ export class EnquiryService {
       },
     });
     return enquiry;
+  }
+
+  async getAgentEnquiries(agentId: String) {
+   const agent = await this.agentService.findOneOrFail({where:{id:agentId},relations:{agentDestination: true}})
+   const destinationIds = agent.agentDestination.map(eachDestination => {return eachDestination.destinationId})
+   const enquiries = await this.enquiryRepository.find({
+     where: {
+       destinationId: In(destinationIds)
+     },
+     relations:{
+       user:true
+     }
+   })
+   return enquiries;
   }
 
   async delete(id: string) {

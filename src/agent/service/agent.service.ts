@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ObjectLiteral, Repository } from 'typeorm';
+import { GeneralApplicationException } from 'src/common/exception/general.application.exception';
+import { FindOneOptions, ObjectLiteral, Repository } from 'typeorm';
 import {
   CreateAgentInput,
   UpdateAgentInput,
@@ -18,7 +19,16 @@ export class AgentService {
     return await this.agentRepo.findOne(queryObj);
   }
 
-  async findOneOrFail() {}
+  async findOneOrFail(
+    query: ObjectLiteral | FindOneOptions<Agent> | string,
+    errorMessage = 'Agent not found',
+  ): Promise<Agent> {
+    typeof query === 'string' && (query = { where: { id: query } });
+    !Object.keys(query).includes('where') && (query = { where: query });
+    const resp = await this.agentRepo.findOne(query);
+    if (!resp) throw new GeneralApplicationException(errorMessage);
+    return resp;
+  }
 
   async find() {
     return await this.agentRepo.find();
