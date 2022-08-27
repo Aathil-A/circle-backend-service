@@ -19,4 +19,13 @@ export class User {
   @Column()
   name: string;
 
+  @Column({nullable:true})
+  address: string;
+
+  @Column({nullable:true})
+  phone: string;
+
+  @Column({nullable:true})
+  firebaseId: string;
+
 }
