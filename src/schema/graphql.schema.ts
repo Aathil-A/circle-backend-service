@@ -47,6 +47,7 @@ export interface IQuery {
     getAgents(): Nullable<Nullable<Agent>[]> | Promise<Nullable<Nullable<Agent>[]>>;
     getAgent(id: string): Nullable<Agent> | Promise<Nullable<Agent>>;
     health(): Nullable<string> | Promise<Nullable<string>>;
+    getPresignedUrl(): Nullable<string> | Promise<Nullable<string>>;
     getUsers(): Nullable<Nullable<User>[]> | Promise<Nullable<Nullable<User>[]>>;
     getUser(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
