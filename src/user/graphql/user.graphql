@@ -3,6 +3,7 @@ type User {
   email: String
   password: String
   name: String
+  firebaseId: String
 }
 
 input CreateUserInput {
@@ -11,15 +12,23 @@ input CreateUserInput {
   password: String!
 }
 
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
 input UpdateUserInput {
   name: String
   email: String
   password: String
+  firebaseId: String
 }
 
 type Query {
   getUsers: [User]
   getUser(id: ID!): User
+  loginUser(input: LoginInput):User
 }
 
 type Mutation {

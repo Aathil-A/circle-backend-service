@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ObjectLiteral, Repository } from 'typeorm';
 import { CreateUserInput } from '../../schema/graphql.schema';
 import { User } from '../entity/user.entity';
 
@@ -24,14 +24,14 @@ export class UserService {
     return await this.userRepository.find();
   }
 
-  async findOne(id: string) {
+  async findOne(where:ObjectLiteral) {
     return await this.userRepository.findOne({
-      where: { id },
+      where,
     });
   }
 
   async update(id: string, input: Partial<User>) {
-    let user = await this.findOne(id);
+    let user = await this.findOne({ where: { id } });
     if (!user) {
       return null;
     }
