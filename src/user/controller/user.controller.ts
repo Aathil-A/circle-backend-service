@@ -1,33 +1,33 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
-import { UserService } from "../service/user.service";
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { UserService } from '../service/user.service';
 
 @Controller('/user')
-export class UserController{
-    constructor(private userService: UserService) { }
-    
-    @Post()
-    async createUser(@Body('input') input: any) {
-        return await this.userService.create(input);
-    }
+export class UserController {
+  constructor(private userService: UserService) {}
 
-    @Get('/')
-    async getUsers() {
-        return await this.userService.findAll();
-    }
+  @Post()
+  async createUser(@Body('input') input: any) {
+    return await this.userService.create(input);
+  }
 
-    @Get('/:id')
-    async getUser(@Param('id') id: string) {
-        return await this.userService.findOne(id);
-    }
+  @Get('/')
+  async getUsers() {
+    return await this.userService.findAll();
+  }
 
-    // async updateUser(
-    //     @Args('id') id: string,
-    //     @Args('input') input: UpdateUserInput
-    // ) {
-    //     return await this.userService.update(id, input)
-    // }
+  @Get('/:id')
+  async getUser(@Param('id') id: string) {
+    return await this.userService.findOne(id);
+  }
 
-    // async deleteUser(@Args('id') id: string) {
-    //     return await this.userService.delete(id);
-    // }
+  // async updateUser(
+  //     @Args('id') id: string,
+  //     @Args('input') input: UpdateUserInput
+  // ) {
+  //     return await this.userService.update(id, input)
+  // }
+
+  // async deleteUser(@Args('id') id: string) {
+  //     return await this.userService.delete(id);
+  // }
 }

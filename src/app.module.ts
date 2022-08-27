@@ -11,6 +11,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { DatabaseModule } from './common/database/database.module';
 import { DestinationModule } from './destination/destination.module';
 import { AgentModule } from './agent/agent.module';
+import { EnquiryModule } from './enquiry/enquiry.module';
 import { FileUploadModule } from './fileUpload/fileupload.module';
 
 @Module({
@@ -41,6 +42,7 @@ import { FileUploadModule } from './fileUpload/fileupload.module';
     UserModule,
     DestinationModule,
     AgentModule,
+    EnquiryModule,
     FileUploadModule,
   ],
   controllers: [AppController],

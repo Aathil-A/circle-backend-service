@@ -1,0 +1,48 @@
+scalar Date 
+
+enum HotelStar {
+    One
+    Two
+    Three
+    Four
+    Five
+    No Preference
+}
+
+type Enquiry{
+    id: String
+    user: User
+    pickUpPoint: String
+    destination: Destination
+    startDate: Date
+    returnDate: Date
+    budget: Int
+    adults: Int
+    children: Int
+    hotelStar: HotelStar
+    notes: String
+    createdAt: Date
+}
+
+input CreateEnquiryInput{
+    userId: String!
+    pickUpPoint: String!
+    destinationId: String!
+    startDate: Date!
+    returnDate: Date!
+    budget: Int!
+    adults: Int!
+    children: Int
+    hotelStar: HotelStar
+    notes: String
+}
+
+type Query {
+    getEnquiry(id: String!): Enquiry
+    getEnquiries: [Enquiry]
+}
+
+type Mutation {
+    createEnquiry(input: CreateEnquiryInput): Enquiry
+    deleteEnquiry(id: String!): Boolean
+}
