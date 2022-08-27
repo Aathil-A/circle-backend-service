@@ -1,4 +1,4 @@
 export enum S3Operation {
-    putObject = 'putObject',
-    getObject = 'getObject',
-  }
+  putObject = 'putObject',
+  getObject = 'getObject',
+}

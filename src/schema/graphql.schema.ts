@@ -14,8 +14,7 @@ export enum HotelStar {
     Three = "Three",
     Four = "Four",
     Five = "Five",
-    No = "No",
-    Preference = "Preference"
+    NoPreference = "NoPreference"
 }
 
 export enum QuotationStatus {
@@ -96,30 +95,19 @@ export class Agent {
     isVerified?: Nullable<boolean>;
 }
 
-export abstract class IQuery {
-    abstract getAgents(): Nullable<Nullable<Agent>[]> | Promise<Nullable<Nullable<Agent>[]>>;
-
-    abstract getAgent(id: string): Nullable<Agent> | Promise<Nullable<Agent>>;
-
-    abstract health(): Nullable<string> | Promise<Nullable<string>>;
-
-    abstract getDestinations(): Nullable<Nullable<Destination>[]> | Promise<Nullable<Nullable<Destination>[]>>;
-
-    abstract getDestination(id: string): Nullable<Destination> | Promise<Nullable<Destination>>;
-
-    abstract getEnquiry(id: string): Nullable<Enquiry> | Promise<Nullable<Enquiry>>;
-
-    abstract getEnquiries(): Nullable<Nullable<Enquiry>[]> | Promise<Nullable<Nullable<Enquiry>[]>>;
-
-    abstract getPresignedUrl(): Nullable<GetPreSignedUrlOutput> | Promise<Nullable<GetPreSignedUrlOutput>>;
-
-    abstract getQuotations(quotationQueryOption?: Nullable<QuotationQueryOption>): Nullable<Nullable<Quotation>[]> | Promise<Nullable<Nullable<Quotation>[]>>;
-
-    abstract getUsers(): Nullable<Nullable<User>[]> | Promise<Nullable<Nullable<User>[]>>;
-
-    abstract getUser(id: string): Nullable<User> | Promise<Nullable<User>>;
-
-    abstract loginUser(input?: Nullable<LoginInput>): Nullable<User> | Promise<Nullable<User>>;
+export interface IQuery {
+    getAgents(): Nullable<Nullable<Agent>[]> | Promise<Nullable<Nullable<Agent>[]>>;
+    getAgent(id: string): Nullable<Agent> | Promise<Nullable<Agent>>;
+    health(): Nullable<string> | Promise<Nullable<string>>;
+    getDestinations(): Nullable<Nullable<Destination>[]> | Promise<Nullable<Nullable<Destination>[]>>;
+    getDestination(id: string): Nullable<Destination> | Promise<Nullable<Destination>>;
+    getEnquiry(id: string): Nullable<Enquiry> | Promise<Nullable<Enquiry>>;
+    getCustomerEnquiries(userId: string): Nullable<Nullable<Enquiry>[]> | Promise<Nullable<Nullable<Enquiry>[]>>;
+    getDestinationEnquiries(destinationId: string): Nullable<Nullable<Enquiry>[]> | Promise<Nullable<Nullable<Enquiry>[]>>;
+    getPresignedUrl(): Nullable<GetPreSignedUrlOutput> | Promise<Nullable<GetPreSignedUrlOutput>>;
+    getQuotations(quotationQueryOption?: Nullable<QuotationQueryOption>): Nullable<Nullable<Quotation>[]> | Promise<Nullable<Nullable<Quotation>[]>>;
+    getUsers(): Nullable<Nullable<User>[]> | Promise<Nullable<Nullable<User>[]>>;
+    getUser(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
 
 export abstract class IMutation {

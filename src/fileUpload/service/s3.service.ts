@@ -9,9 +9,7 @@ import { S3Operation } from '../enum/s3';
 
 @Injectable()
 export class S3Service {
-  constructor(
-    @InjectS3() private readonly s3: S3,
-  ) {}
+  constructor(@InjectS3() private readonly s3: S3) {}
 
   /**
    * To get a signed url for performing an S3 operation.
@@ -34,5 +32,4 @@ export class S3Service {
     output.url = await this.s3.getSignedUrlPromise(operation, params);
     return output;
   }
-
 }
