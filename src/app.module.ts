@@ -14,6 +14,7 @@ import { DestinationModule } from './destination/destination.module';
 import { AgentModule } from './agent/agent.module';
 import { EnquiryModule } from './enquiry/enquiry.module';
 import { FileUploadModule } from './fileUpload/fileupload.module';
+import { NotificationModule } from './notification/notification.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { FileUploadModule } from './fileUpload/fileupload.module';
     AgentModule,
     EnquiryModule,
     FileUploadModule,
+    NotificationModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],

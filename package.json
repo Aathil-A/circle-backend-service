@@ -36,6 +36,7 @@
     "@nestjs/typeorm": "^9.0.0",
     "apollo-server-express": "^3.10.0",
     "aws-sdk": "^2.1204.0",
+    "axios": "^0.27.2",
     "dataloader": "^2.1.0",
     "firebase": "^9.9.3",
     "firebase-admin": "^11.0.1",
