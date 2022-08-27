@@ -26,6 +26,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@keyvaluesystems/nestjs-dataloader": "^2.0.0",
     "@nestjs/apollo": "^10.0.19",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^2.2.0",
@@ -35,6 +36,7 @@
     "@nestjs/typeorm": "^9.0.0",
     "apollo-server-express": "^3.10.0",
     "aws-sdk": "^2.1204.0",
+    "dataloader": "^2.1.0",
     "graphql": "^16.5.0",
     "nestjs-s3": "^1.0.1",
     "pg": "^8.7.3",

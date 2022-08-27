@@ -1,8 +1,12 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { InjectLoader } from '@keyvaluesystems/nestjs-dataloader';
+import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import DataLoader from 'dataloader';
 import {
   CreateAgentInput,
   UpdateAgentInput,
 } from '../../schema/graphql.schema';
+import { AgentDestination } from '../entity/agent.destination.entity';
+import { Agent } from '../entity/agent.entity';
 import { AgentService } from '../service/agent.service';
 
 @Resolver()
@@ -36,4 +40,22 @@ export class AgentResolver {
   // async deleteAgent(@Args('id') id: string) {
   //   return await this.agentService.delete(id);
   // }
+    
+    @ResolveField()
+    async destinations(
+        @Parent() agent: Agent,
+        @InjectLoader({
+            fromEntity: AgentDestination,
+            resolveType: 'many',
+            fieldName: 'agentId',
+            resolveInput: {
+                relations: ['destination']
+            
+            }
+            
+        })loader: DataLoader<string,AgentDestination[]>
+    ) {
+        const out = await loader.load(agent.id)
+        return out;
+    }
 }

@@ -17,7 +17,7 @@ export class UserController {
 
   @Get('/:id')
   async getUser(@Param('id') id: string) {
-    return await this.userService.findOne(id);
+    return await this.userService.findOne({where:{id}});
   }
 
   // async updateUser(
