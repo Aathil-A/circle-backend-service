@@ -55,11 +55,16 @@ export interface CreateEnquiryInput {
 }
 
 export interface CreateQuotationInput {
-    userId?: Nullable<string>;
-    enquiryId?: Nullable<string>;
-    agentId?: Nullable<string>;
+    userId: string;
+    enquiryId: string;
+    agentId: string;
     fileLink?: Nullable<string>;
     notes?: Nullable<string>;
+}
+
+export interface EditQuotationInput {
+    status?: Nullable<QuotationStatus>;
+    id?: Nullable<string>;
 }
 
 export interface QuotationQueryOption {
@@ -120,6 +125,7 @@ export interface IMutation {
     createEnquiry(input?: Nullable<CreateEnquiryInput>): Nullable<Enquiry> | Promise<Nullable<Enquiry>>;
     deleteEnquiry(id: string): Nullable<boolean> | Promise<Nullable<boolean>>;
     createQuotation(input: CreateQuotationInput): Nullable<Quotation> | Promise<Nullable<Quotation>>;
+    editQuotation(input: EditQuotationInput): Nullable<Quotation> | Promise<Nullable<Quotation>>;
     createUser(input: CreateUserInput): Nullable<User> | Promise<Nullable<User>>;
     updateUser(id: string, input: UpdateUserInput): Nullable<User> | Promise<Nullable<User>>;
     deleteUser(id: string): Nullable<User> | Promise<Nullable<User>>;

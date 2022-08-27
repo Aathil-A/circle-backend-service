@@ -9,9 +9,9 @@ type Quotation {
 }
 
 input CreateQuotationInput {
-  userId: String
-  enquiryId: String
-  agentId: String
+  userId: String!
+  enquiryId: String!
+  agentId: String!
   fileLink: String
   notes: String
 }
@@ -20,6 +20,11 @@ enum QuotationStatus {
   ACCEPTED
   REJECTED
   PENDING
+}
+
+input EditQuotationInput {
+  status: QuotationStatus
+  id: String
 }
 
 input QuotationQueryOption {
@@ -34,4 +39,5 @@ type Query {
 
 type Mutation {
   createQuotation(input: CreateQuotationInput!): Quotation
+  editQuotation(input: EditQuotationInput!): Quotation
 }

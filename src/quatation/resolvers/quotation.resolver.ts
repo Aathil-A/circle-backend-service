@@ -1,6 +1,7 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CreateUserInput, UpdateUserInput } from '../../schema/graphql.schema';
 import { CreateQuotationInput } from '../model/createQuotationInput.model';
+import { EditQuotationInput } from '../model/editQuotationInput';
 import { QuotationQueryOption } from '../model/filter.model';
 import { QuotationService } from '../service/quotation.service';
 
@@ -11,6 +12,11 @@ export class QuatationResolver {
   @Mutation()
   async createQuotation(@Args('input') input: CreateQuotationInput) {
     return this.quotationService.createQuatation(input);
+  }
+
+  @Mutation()
+  async editQuotation(@Args('input') input: EditQuotationInput) {
+    return this.quotationService.editQuotation(input);
   }
 
   @Query()

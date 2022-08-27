@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Quotation } from '../entity/quotation.entity';
 import { CreateQuotationInput } from '../model/createQuotationInput.model';
+import { EditQuotationInput } from '../model/editQuotationInput';
 import { QuotationQueryOption } from '../model/filter.model';
 
 @Injectable()
@@ -30,5 +31,11 @@ export class QuotationService {
         }),
       },
     });
+  }
+
+  async editQuotation(
+    editQuotationInput: EditQuotationInput,
+  ): Promise<Quotation> {
+    return this.quotationRepo.save(editQuotationInput);
   }
 }
