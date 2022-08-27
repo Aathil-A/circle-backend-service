@@ -30,11 +30,16 @@ export interface CreateAgentInput {
     firebaseId?: Nullable<string>;
 }
 
-export interface UpdateAgentInput {
+export interface LoginAgentInput {
     name: string;
-    address: string;
-    phone: string;
+}
+
+export interface UpdateAgentInput {
+    name?: Nullable<string>;
+    address?: Nullable<string>;
+    phone?: Nullable<string>;
     firebaseId?: Nullable<string>;
+    destinationIds?: Nullable<Nullable<string>[]>;
 }
 
 export interface CreateDestinationInput {
@@ -99,6 +104,7 @@ export interface Agent {
 export interface IQuery {
     getAgents(): Nullable<Nullable<Agent>[]> | Promise<Nullable<Nullable<Agent>[]>>;
     getAgent(id: string): Nullable<Agent> | Promise<Nullable<Agent>>;
+    loginAgent(input?: Nullable<LoginAgentInput>): Nullable<Agent> | Promise<Nullable<Agent>>;
     health(): Nullable<string> | Promise<Nullable<string>>;
     getDestinations(): Nullable<Nullable<Destination>[]> | Promise<Nullable<Nullable<Destination>[]>>;
     getDestination(id: string): Nullable<Destination> | Promise<Nullable<Destination>>;
@@ -114,7 +120,7 @@ export interface IQuery {
 
 export interface IMutation {
     createAgent(input?: Nullable<CreateAgentInput>): Nullable<Agent> | Promise<Nullable<Agent>>;
-    updateAgent(input?: Nullable<UpdateAgentInput>): Nullable<Agent> | Promise<Nullable<Agent>>;
+    updateAgent(id: string, input: UpdateAgentInput): Nullable<Agent> | Promise<Nullable<Agent>>;
     deleteAgent(id: string): Nullable<Agent> | Promise<Nullable<Agent>>;
     createDestination(input: CreateDestinationInput): Nullable<Destination> | Promise<Nullable<Destination>>;
     createEnquiry(input?: Nullable<CreateEnquiryInput>): Nullable<Enquiry> | Promise<Nullable<Enquiry>>;

@@ -15,20 +15,25 @@ input CreateAgentInput{
     phone: String!
     firebaseId:String
 }
+input LoginAgentInput{
+    name:String!
+}
 
 input UpdateAgentInput{
-    name: String!
-    address: String!
-    phone: String!
+    name: String
+    address: String
+    phone: String
     firebaseId:String
+    destinationIds:[String]
 }
 type Query{
     getAgents:[Agent]
     getAgent(id:ID!): Agent
+    loginAgent(input:LoginAgentInput): Agent
 }
 
 type Mutation{
     createAgent(input:CreateAgentInput): Agent
-    updateAgent(input:UpdateAgentInput): Agent
+    updateAgent(id:ID!,input:UpdateAgentInput!): Agent
     deleteAgent(id:ID!):Agent
 }

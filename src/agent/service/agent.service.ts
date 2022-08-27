@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { CreateAgentInput } from '../../schema/graphql.schema';
+import { ObjectLiteral, Repository } from 'typeorm';
+import {
+  CreateAgentInput,
+  UpdateAgentInput,
+} from '../../schema/graphql.schema';
 import { Agent } from '../entity/agent.entity';
 
 @Injectable()
@@ -11,10 +14,8 @@ export class AgentService {
     private agentRepo: Repository<Agent>,
   ) {}
 
-  async findOne(id: string) {
-    return await this.agentRepo.findOne({
-      where: { id },
-    });
+  async findOne(where:ObjectLiteral) {
+    return await this.agentRepo.findOne(where);
   }
 
   async findOneOrFail() {}
@@ -37,5 +38,9 @@ export class AgentService {
     return await this.agentRepo.save(input);
   }
 
+    async update(id: string, input: UpdateAgentInput) {
+        const agent = await this.findOne({where:{id}})
+    }
+    
   async remove() {}
 }

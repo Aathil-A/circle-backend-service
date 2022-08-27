@@ -1,8 +1,17 @@
 import { InjectLoader } from '@keyvaluesystems/nestjs-dataloader';
-import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 import DataLoader from 'dataloader';
 import {
   CreateAgentInput,
+  LoginAgentInput,
+  LoginInput,
   UpdateAgentInput,
 } from '../../schema/graphql.schema';
 import { AgentDestination } from '../entity/agent.destination.entity';
@@ -24,38 +33,42 @@ export class AgentResolver {
   }
 
   @Query()
-  async getAgent(@Args('id') id: string) {
-    return await this.agentService.findOne(id);
+  async loginAgent(@Args('input') input: LoginAgentInput) {
+      return await this.agentService.findOne({ where: { name: input.name } });
   }
 
-  // @Mutation()
-  // async updateAgent(
-  //   @Args('id') id: string,
-  //   @Args('input') input: UpdateAgentInput,
-  // ) {
-  //   return await this.agentService.update(id, input);
-  // }
+  @Query()
+  async getAgent(@Args('id') id: string) {
+    return await this.agentService.findOne({ where: id });
+  }
 
-  // @Mutation()
-  // async deleteAgent(@Args('id') id: string) {
-  //   return await this.agentService.delete(id);
-  // }
-    
-    @ResolveField()
-    async destinations(
-        @Parent() agent: Agent,
-        @InjectLoader({
-            fromEntity: AgentDestination,
-            resolveType: 'many',
-            fieldName: 'agentId',
-            resolveInput: {
-                relations: ['destination']
-            
-            }
-            
-        })loader: DataLoader<string,AgentDestination[]>
-    ) {
-        const out = await loader.load(agent.id)
-        return out;
-    }
+  @Mutation()
+  async updateAgent(
+    @Args('id') id: string,
+    @Args('input') input: UpdateAgentInput,
+  ) {
+    return await this.agentService.update(id, input);
+  }
+
+  //   @Mutation()
+  //   async deleteAgent(@Args('id') id: string) {
+  //     return await this.agentService.delete(id);
+  //   }
+
+  @ResolveField()
+  async destinations(
+    @Parent() agent: Agent,
+    @InjectLoader({
+      fromEntity: AgentDestination,
+      resolveType: 'many',
+      fieldName: 'agentId',
+      resolveInput: {
+        relations: ['destination'],
+      },
+    })
+    loader: DataLoader<string, AgentDestination[]>,
+  ) {
+    const out = await loader.load(agent.id);
+    return out;
+  }
 }
