@@ -49,7 +49,13 @@ export class AgentService {
   }
 
     async update(id: string, input: UpdateAgentInput) {
-        const agent = await this.findOne({where:{id}})
+        let agent:Agent = await this.findOne({ where: { id } })
+        agent = {
+            ...agent,
+            ...input,
+        }
+        agent = await this.save(agent);
+        return agent;
     }
     
   async remove() {}

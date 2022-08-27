@@ -4,6 +4,7 @@ import { AgentService } from 'src/agent/service/agent.service';
 import { GeneralApplicationException } from 'src/common/exception/general.application.exception';
 import { NotificationService } from 'src/notification/notification.service';
 import { FindOneOptions, In, ObjectLiteral, Repository } from 'typeorm';
+import { DestinationService } from '../../destination/service/destination.service';
 import { CreateEnquiryInput, EnquiryStatus } from '../../schema/graphql.schema';
 import { Enquiry } from '../entity/enquiry.entity';
 
@@ -13,7 +14,8 @@ export class EnquiryService {
     @InjectRepository(Enquiry)
     private readonly enquiryRepository: Repository<Enquiry>,
     private agentService: AgentService,
-    private readonly notify: NotificationService
+    private readonly notify: NotificationService,
+    private readonly destinationService: DestinationService,
   ) {}
 
   async findOneOrFail(
@@ -41,8 +43,8 @@ export class EnquiryService {
     input.hotelStar && (newEnquiry.hotelStar = input.hotelStar);
     input.notes && (newEnquiry.notes = input.notes);
     const enquiry = await this.enquiryRepository.save(newEnquiry);
-    if(!enquiry){
-      this.notify.send();
+    if(enquiry){
+      await this.notify.send();
     }
   }
 
@@ -76,17 +78,23 @@ export class EnquiryService {
 
   async getAgentEnquiries(agentId: String) {
    const agent = await this.agentService.findOneOrFail({where:{id:agentId},relations:{agentDestination: true}})
-   const destinationIds = agent.agentDestination.map(eachDestination => {return eachDestination.destinationId})
+    const destinationIds = agent.agentDestination.map(eachDestination => { return eachDestination.destinationId })
+    const destinations = await this.destinationService.find({
+      where: {
+        id: In(destinationIds)
+      }
+    })
    const enquiries = await this.enquiryRepository.find({
      where: {
        destinationId: In(destinationIds),
        status: EnquiryStatus.QuotationPending,
      },
      relations:{
-       user:true
+       user: true,
+       destination:true
      }
    })
-   return enquiries;
+    return enquiries
   }
 
   async delete(id: string) {

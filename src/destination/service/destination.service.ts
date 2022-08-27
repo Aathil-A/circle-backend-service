@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateDestinationInput } from 'src/schema/graphql.schema';
-import { Repository } from 'typeorm';
+import { ObjectLiteral, Repository } from 'typeorm';
 import { Destination } from '../entity/destination.entity';
 
 @Injectable()
@@ -26,5 +26,9 @@ export class DestinationService {
     return await this.destinationRepository.findOne({
       where: { id },
     });
+  }
+
+  async find(query: ObjectLiteral) {
+    return await this.destinationRepository.find(query);
   }
 }

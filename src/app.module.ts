@@ -33,6 +33,9 @@ import { NotificationModule } from './notification/notification.module';
     // }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
+      cors: {
+        origin:true,
+      },
       playground: true,
       path: '/graphql',
       typePaths: ['src/**/*.graphql'],
