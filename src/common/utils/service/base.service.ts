@@ -4,10 +4,8 @@ import { Entity, EntitySchema, Repository } from "typeorm";
 import { Newable } from "../types";
 
 @Injectable()
-export class BaseService<E extends Newable<any>>{
+export class BaseService{
     constructor(
-       @InjectRepository(User) 
-       private entityRepo:Repository<E>
     ) {}
     
     async findOne() { }
