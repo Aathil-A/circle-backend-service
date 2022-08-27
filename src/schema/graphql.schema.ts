@@ -53,7 +53,7 @@ export interface IQuery {
     health(): Nullable<string> | Promise<Nullable<string>>;
     getDestinations(): Nullable<Nullable<Destination>[]> | Promise<Nullable<Nullable<Destination>[]>>;
     getDestination(id: string): Nullable<Destination> | Promise<Nullable<Destination>>;
-    getPresignedUrl(): Nullable<string> | Promise<Nullable<string>>;
+    getPresignedUrl(): Nullable<GetPreSignedUrlOutput> | Promise<Nullable<GetPreSignedUrlOutput>>;
     getUsers(): Nullable<Nullable<User>[]> | Promise<Nullable<Nullable<User>[]>>;
     getUser(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
@@ -71,6 +71,11 @@ export interface IMutation {
 export interface Destination {
     id?: Nullable<string>;
     name?: Nullable<string>;
+}
+
+export interface GetPreSignedUrlOutput {
+    key?: Nullable<string>;
+    url?: Nullable<string>;
 }
 
 export interface User {

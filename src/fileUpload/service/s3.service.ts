@@ -3,6 +3,8 @@ import { ConfigService } from '@nestjs/config';
 import { S3 } from 'aws-sdk';
 import { InjectS3 } from 'nestjs-s3';
 import { ObjectLiteral } from 'typeorm';
+import { v4 as uuid } from 'uuid';
+import { GetPreSignedUrlOutput } from '../../schema/graphql.schema';
 import { S3Operation } from '../enum/s3';
 
 @Injectable()
@@ -19,14 +21,18 @@ export class S3Service {
    */
   async getPresignedUrl(input: ObjectLiteral, operation: S3Operation) {
     //TODO: If possible, narrow down input type based on operation.
-    const s3Bucket = 'circle-bucket-travel'
+    const s3Bucket = 'circle-bucket-travel';
+    let output: GetPreSignedUrlOutput = {
+      key:uuid()
+    }
     const params = {
      
-      Key:"test",
+      Key:output.key,
       Bucket: s3Bucket,
       Expires: 60 * 20, // 5 minutes validity
     };
-    return await this.s3.getSignedUrlPromise(operation, params);
+    output.url = await this.s3.getSignedUrlPromise(operation, params);
+    return output;
   }
 
 }
