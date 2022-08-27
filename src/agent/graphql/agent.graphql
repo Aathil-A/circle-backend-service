@@ -1,0 +1,9 @@
+type Agent{
+    id: String
+    name: String
+    address: String
+    phone: String
+    firebaseId: String
+    isVerified: Boolean
+}
+

@@ -15,12 +15,12 @@ export class User {
   name: string;
 
   @Column({nullable:true})
-  address: string;
+  address?: string;
 
   @Column({nullable:true})
-  phone: string;
+  phone?: string;
 
   @Column({nullable:true})
-  firebaseId: string;
+  firebaseId?: string;
 
 }

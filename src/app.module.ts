@@ -9,6 +9,7 @@ import { join } from 'path';
 import { AppResolver } from './app.resolver';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { DatabaseModule } from './common/database/database.module';
+import { AgentModule } from './agent/agent.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { DatabaseModule } from './common/database/database.module';
     }),
     DatabaseModule,
     UserModule,
+    AgentModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],

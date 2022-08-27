@@ -20,6 +20,15 @@ export interface UpdateUserInput {
     password?: Nullable<string>;
 }
 
+export interface Agent {
+    id?: Nullable<string>;
+    name?: Nullable<string>;
+    address?: Nullable<string>;
+    phone?: Nullable<string>;
+    firebaseId?: Nullable<string>;
+    isVerified?: Nullable<boolean>;
+}
+
 export interface IQuery {
     health(): Nullable<string> | Promise<Nullable<string>>;
     getUsers(): Nullable<Nullable<User>[]> | Promise<Nullable<Nullable<User>[]>>;
