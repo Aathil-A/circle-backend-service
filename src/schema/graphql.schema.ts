@@ -8,6 +8,24 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export interface CreateAgentInput {
+    name: string;
+    address: string;
+    phone: string;
+    firebaseId?: Nullable<string>;
+}
+
+export interface UpdateAgentInput {
+    name: string;
+    address: string;
+    phone: string;
+    firebaseId?: Nullable<string>;
+}
+
+export interface CreateDestinationInput {
+    name: string;
+}
+
 export interface CreateUserInput {
     name: string;
     email: string;
@@ -39,15 +57,26 @@ export interface IQuery {
     getUser(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
 
-export interface User {
+export interface IMutation {
+    createAgent(input?: Nullable<CreateAgentInput>): Nullable<Agent> | Promise<Nullable<Agent>>;
+    updateAgent(input?: Nullable<UpdateAgentInput>): Nullable<Agent> | Promise<Nullable<Agent>>;
+    deleteAgent(id: string): Nullable<Agent> | Promise<Nullable<Agent>>;
+    createDestination(input: CreateDestinationInput): Nullable<Destination> | Promise<Nullable<Destination>>;
+    createUser(input: CreateUserInput): Nullable<User> | Promise<Nullable<User>>;
+    updateUser(id: string, input: UpdateUserInput): Nullable<User> | Promise<Nullable<User>>;
+    deleteUser(id: string): Nullable<User> | Promise<Nullable<User>>;
+}
+
+export interface Destination {
     id?: Nullable<string>;
     name?: Nullable<string>;
 }
 
-export interface IMutation {
-    createUser(input: CreateUserInput): Nullable<User> | Promise<Nullable<User>>;
-    updateUser(id: string, input: UpdateUserInput): Nullable<User> | Promise<Nullable<User>>;
-    deleteUser(id: string): Nullable<User> | Promise<Nullable<User>>;
+export interface User {
+    id?: Nullable<string>;
+    email?: Nullable<string>;
+    password?: Nullable<string>;
+    name?: Nullable<string>;
 }
 
 type Nullable<T> = T | null;

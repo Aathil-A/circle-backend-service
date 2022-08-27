@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateDestinationInput } from 'src/schema/graphql.schema';
 import { Repository } from 'typeorm';
-import { CreateDestinationInput } from '../../schema/graphql.schema';
 import { Destination } from '../entity/destination.entity';
 
 @Injectable()
