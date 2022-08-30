@@ -44,8 +44,9 @@ export class EnquiryService {
     input.notes && (newEnquiry.notes = input.notes);
     const enquiry = await this.enquiryRepository.save(newEnquiry);
     if(enquiry){
-      await this.notify.send();
+       this.notify.send();
     }
+    return enquiry;
   }
 
   async update(id: string, status: EnquiryStatus) {
@@ -87,7 +88,7 @@ export class EnquiryService {
    const enquiries = await this.enquiryRepository.find({
      where: {
        destinationId: In(destinationIds),
-       status: EnquiryStatus.QuotationPending,
+      //  status: EnquiryStatus.QuotationPending,
      },
      relations:{
        user: true,

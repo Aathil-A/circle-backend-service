@@ -26,7 +26,7 @@ export class NotificationService {
           registration_ids: regIds,
           notification: {
             body: body,
-            title: 'Circle',
+            title: 'You have a new notification',
           },
         },
         {
